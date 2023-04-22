@@ -362,3 +362,68 @@ sorted_a1 = sorted(a1, key=lambda x: x[1], reverse=True)
 print("\n After Sorted basis on Fitness Score:")
 for z1 in sorted_a1:
     print(z1)
+
+    
+    
+ # Multipoint Crossover for 5th Generation-
+
+def crossover(parents, num_offsprings):
+    offsprings = []
+    for i in range(num_offsprings):
+        parent1 = random.choice(parents)
+        parent2 = random.choice(parents)
+        offspring = parent1[:len(parent1)//2] + parent2[len(parent2)//2:]
+        offsprings.append(offspring)
+    return offsprings
+
+parents = [[ 16.62,  13.64,   0.87,  81.75, 460.  , 153.  , 156.  ,   1.9 ,
+         1.47], [ 15.61,  21.19,   1.01,  75.49, 460.  , 153.  , 156.  ,   1.9 ,
+         1.47], [ 18.81,  18.37,   0.68,  59.9 , 460.  , 153.  , 156.  ,   1.9 ,
+         1.47], [ 18.09,   7.77,   0.66,  72.22, 460.  , 153.  , 156.  ,   1.9 ,
+         1.47], [ 16.62,  13.64,   0.87,  81.75, 486.  , 135.  , 129.  ,   1.59,
+         1.33], [ 15.61,  21.19,   1.01,  75.49, 486.  , 135.  , 129.  ,   1.59,
+         1.33], [ 16.09,  11.63,   0.78,  59.78, 460.  , 153.  , 156.  ,   1.9 ,
+         1.47], [ 18.81,  18.37,   0.68,  59.9 , 486.  , 135.  , 129.  ,   1.59,
+         1.33], [  7.67,   7.03,   0.67,  84.59, 486.  , 135.  , 129.  ,   1.59,
+         1.33], [ 16.28,   3.4 ,   0.86,  54.21, 460.  , 153.  , 156.  ,   1.9 ,
+         1.47]]
+num_offsprings = 20
+offsprings = crossover(parents, num_offsprings)
+child = np.array(offsprings)
+c1 = child
+print("Gen5: Child: \n", c1)
+
+
+# Find out the Fitness Value of Children
+Z1 = []
+for i in range(20):
+    Z1.append((0.2 * c1[i][0]) + (0.1 * c1[i][1]) + (0.1 * c1[i][2]) + (0.1 * c1[i][3]) + (0.15 * c1[i][4]) + (0.15 * c1[i][5]) + (0.1 * c1[i][6]) + (0.05 * c1[i][7]) + (0.05 * c1[i][8]))
+
+array = np.array(Z1)
+new_array = array.reshape(20, 1)
+
+# Find out the Fitness Score of Children of Generation 5
+def SumofArray(arr):
+    sum=0
+    n = len(arr)
+    for Z1 in range(n):
+        sum = sum + arr[Z1]
+    return sum
+
+ff1 = ((Z1/SumofArray(Z1))*100)
+fs1 = np.array(ff1)
+Y1 = np.round(fs1, 3)
+y1 = Y1.reshape(20, 1)
+print("Fitness Score:\n", y1)
+
+# Sort the merged array basis on best fitness score
+a1 = [[x, y] for x, y in zip(c1, y1)]
+sorted_a1 = sorted(a1, key=lambda x: x[1], reverse=True)
+print("\n After Sorted basis on Fitness Score:")
+for z1 in sorted_a1:
+    print(z1)
+    
+    
+   
+ # Multipoint Crossover for 6th Generation-
+    
