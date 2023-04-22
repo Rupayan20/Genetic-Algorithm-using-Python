@@ -485,3 +485,147 @@ for z1 in sorted_a1:
  # Multipoint Crossover for 7th Generation-
     
     
+import numpy as np
+import random
+def crossover(parents, num_offsprings):
+    offsprings = []
+    for i in range(num_offsprings):
+        parent1 = random.choice(parents)
+        parent2 = random.choice(parents)
+        offspring = parent1[:len(parent1)//2] + parent2[len(parent2)//2:]
+        offsprings.append(offspring)
+    return offsprings
+
+parents = [[ 16.62,  13.64,   0.87,  81.75, 460.  , 153.  , 156.  ,   1.9 ,
+         1.47], [ 15.61,  21.19,   1.01,  75.49, 460.  , 153.  , 156.  ,   1.9 ,
+         1.47], [ 18.09,   7.77,   0.66,  72.22, 460.  , 153.  , 156.  ,   1.9 ,
+         1.47]]
+num_offsprings = 5
+offsprings = crossover(parents, num_offsprings)
+child = np.array(offsprings)
+c1 = child
+print("Gen7: Child: \n", c1)
+
+
+# Find out the Fitness Value of Children
+Z1 = []
+for i in range(5):
+    Z1.append((0.2 * c1[i][0]) + (0.1 * c1[i][1]) + (0.1 * c1[i][2]) + (0.1 * c1[i][3]) + (0.15 * c1[i][4]) + (0.15 * c1[i][5]) + (0.1 * c1[i][6]) + (0.05 * c1[i][7]) + (0.05 * c1[i][8]))
+
+array = np.array(Z1)
+new_array = array.reshape(5, 1)
+
+# Find out the Fitness Score of Children of Generation 7
+def SumofArray(arr):
+    sum=0
+    n = len(arr)
+    for Z1 in range(n):
+        sum = sum + arr[Z1]
+    return sum
+
+ff1 = ((Z1/SumofArray(Z1))*100)
+fs1 = np.array(ff1)
+Y1 = np.round(fs1, 3)
+y1 = Y1.reshape(5, 1)
+print("Fitness Score:\n", y1)
+
+# Sort the merged array basis on best fitness score
+a1 = [[x, y] for x, y in zip(c1, y1)]
+sorted_a1 = sorted(a1, key=lambda x: x[1], reverse=True)
+print("\n After Sorted basis on Fitness Score:")
+for z1 in sorted_a1:
+    print(z1)
+    
+    
+   
+ # Multipoint Crossover for 8th Generation-
+    
+    import numpy as np
+import random
+def crossover(parents, num_offsprings):
+    offsprings = []
+    for i in range(num_offsprings):
+        parent1 = random.choice(parents)
+        parent2 = random.choice(parents)
+        offspring = parent1[:len(parent1)//2] + parent2[len(parent2)//2:]
+        offsprings.append(offspring)
+    return offsprings
+
+parents = [[ 16.62,  13.64,   0.87,  81.75, 460.  , 153.  , 156.  ,   1.9 ,
+         1.47], [ 15.61,  21.19,   1.01,  75.49, 460.  , 153.  , 156.  ,   1.9 ,
+         1.47]]
+num_offsprings = 2
+offsprings = crossover(parents, num_offsprings)
+child = np.array(offsprings)
+c1 = child
+print("Gen8: Child: \n", c1)
+
+
+# Find out the Fitness Value of Children
+Z1 = []
+for i in range(2):
+    Z1.append((0.2 * c1[i][0]) + (0.1 * c1[i][1]) + (0.1 * c1[i][2]) + (0.1 * c1[i][3]) + (0.15 * c1[i][4]) + (0.15 * c1[i][5]) + (0.1 * c1[i][6]) + (0.05 * c1[i][7]) + (0.05 * c1[i][8]))
+
+array = np.array(Z1)
+new_array = array.reshape(2, 1)
+
+# Find out the Fitness Score of Children of Generation 8
+def SumofArray(arr):
+    sum=0
+    n = len(arr)
+    for Z1 in range(n):
+        sum = sum + arr[Z1]
+    return sum
+
+ff1 = ((Z1/SumofArray(Z1))*100)
+fs1 = np.array(ff1)
+Y1 = np.round(fs1, 3)
+y1 = Y1.reshape(2, 1)
+print("Fitness Score:\n", y1)
+
+# Sort the merged array basis on best fitness score
+a1 = [[x, y] for x, y in zip(c1, y1)]
+sorted_a1 = sorted(a1, key=lambda x: x[1], reverse=True)
+print("\n After Sorted basis on Fitness Score:")
+for z1 in sorted_a1:
+    print(z1)
+    
+  
+
+ # We have to do Mutation in 8th Generation-
+    
+
+    
+    import numpy as np
+import random
+
+# Define the mutation function
+def mutation(child, mutation_rate, efficiency_min, efficiency_max, isc_min, isc_max):
+    mutated_child = child.copy()
+    for i in range(len(mutated_child)):
+        if random.random() < mutation_rate:
+            # Apply mutation to efficiency value
+            mutated_child[0] = random.uniform(efficiency_min, efficiency_max)
+            # Apply mutation to short circuit current value
+            mutated_child[1] = random.uniform(isc_min, isc_max)
+    return mutated_child
+
+# Define the original child
+child = [16.62, 13.64, 0.87, 81.75, 460.0, 153.0, 156.0, 1.9, 1.47]
+
+# Define the mutation rate
+mutation_rate = 0.1
+
+# Define the mutation range for efficiency and ISC values
+efficiency_min = 19.5
+efficiency_max = 19.62
+isc_min = 21.5
+isc_max = 21.62
+
+# Apply mutation to the first child
+mutateChild = mutation(child, mutation_rate, efficiency_min, efficiency_max, isc_min, isc_max)
+mutate_child = np.round(mutateChild, 2)
+
+# Print the mutated child
+print("Original child: ", child)
+print("Mutated child: ", mutate_child)
